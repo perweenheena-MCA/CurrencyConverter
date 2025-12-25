@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter</title>
+</head>
+<body>
+    <h2>Currency Converter</h2>
+
+    Amount:
+    <input type="number" id="amount" />
+
+    <br><br>
+
+    From:
+    <select id="from">
+        <option>USD</option>
+        <option>EUR</option>
+        <option>GBP</option>
+        <option>INR</option>
+        <option>SGD</option>
+        <option>JPY</option>
+    </select>
+
+    To:
+    <select id="to">
+        <option>INR</option>
+        <option>USD</option>
+        <option>EUR</option>
+        <option>GBP</option>
+        <option>SGD</option>
+        <option>JPY</option>
+    </select>
+
+    <br><br>
+
+    <button onclick="convert()">Convert</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+function convert() {
+    let amount = document.getElementById("amount").value;
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+
+    fetch(`http://127.0.0.1:5000/convert?from=${from}&to=${to}&amount=${amount}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.converted_amount !== undefined) {
+                document.getElementById("result").innerText =
+                    "Converted Amount: " + data.converted_amount;
+            } else {
+                document.getElementById("result").innerText = data.error;
+            }
+        })
+        .catch(err => {
+            document.getElementById("result").innerText = "Error: " + err;
+        });
+}
+</script>
+
+</body>
+</html>
