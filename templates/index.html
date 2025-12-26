@@ -2,40 +2,182 @@
 <html>
 <head>
     <title>Currency Converter</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+     <!--Flag Icons library-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+        
+    <!--css-->
+    <style>
+           body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  font-family: Arial, sans-serif;
+}
+
+.converter-box {
+  background: white;
+  padding: 25px;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
+
+.converter-box h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.converter-box label {
+  display: block;
+  margin-top: 10px;
+}
+
+.converter-box input,
+.converter-box select,
+.converter-box button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+.converter-box button {
+  margin-top: 15px;
+  background: #4facfe;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#result {
+  margin-top: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+.flag-icon {
+  width: 25px;
+  height: 18px;
+  margin-right: 5px;
+}
+
+
+</style>
+
 </head>
-<body>
-    <h2>Currency Converter</h2>
+  <!--JavaScript-->
+   
+<script>
+const fromSelect = document.getElementById("from");
+const toSelect = document.getElementById("to");
 
-    Amount:
-    <input type="number" id="amount" />
+const fromFlag = document.getElementById("fromFlag");
+const toFlag = document.getElementById("toFlag");
 
-    <br><br>
+function updateFlag(selectElement, flagElement) {
+    let code = selectElement.value.toLowerCase();
 
-    From:
-    <select id="from">
-        <option>USD</option>
-        <option>EUR</option>
-        <option>GBP</option>
-        <option>INR</option>
-        <option>SGD</option>
-        <option>JPY</option>
-    </select>
+    if (code === "usd") flagElement.className = "flag-icon flag-icon-us";
+    else if (code === "inr") flagElement.className = "flag-icon flag-icon-in";
+    else if (code === "eur") flagElement.className = "flag-icon flag-icon-eu";
+    else if (code === "gbp") flagElement.className = "flag-icon flag-icon-gb";
+    else if (code === "sgd") flagElement.className = "flag-icon flag-icon-sg";
+    else if (code === "jpy") flagElement.className = "flag-icon flag-icon-jp";
+}
 
-    To:
-    <select id="to">
-        <option>INR</option>
-        <option>USD</option>
-        <option>EUR</option>
-        <option>GBP</option>
-        <option>SGD</option>
-        <option>JPY</option>
-    </select>
+fromSelect.addEventListener("change", () => {
+    updateFlag(fromSelect, fromFlag);
+});
 
-    <br><br>
+toSelect.addEventListener("change", () => {
+    updateFlag(toSelect, toFlag);
+});
+</script>
 
-    <button onclick="convert()">Convert</button>
 
-    <h3 id="result"></h3>
+<body> 
+    
+    <div class="converter-box">
+
+  <h2>Currency Converter</h2> 
+
+        <!--   <p>
+    <span class="flag-icon flag-icon-us"></span> USD
+    &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-in"></span> INR
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-sg"></span> SGD
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-eu"></span> EUR
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-gb"></span> GBP
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-jp"></span> JPY
+  </p>--> 
+
+
+  <label>Amount</label>
+  <input type="number" id="amount">
+
+  <label>From</label>
+
+  <span class="flag-icon flag-icon-us"></span> USD
+    &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-in"></span> INR
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-sg"></span> SGD
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-eu"></span> EUR
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-gb"></span> GBP
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-jp"></span> JPY
+  <select id="from"> 
+        <option value="USD"><span class="flag-icon flag-icon-us"></span> USD</option>
+        <option value="INR"><span class="flag-icon flag-icon-in"></span> INR</option>
+        <option value="EUR"><span class="flag-icon flag-icon-eu"></span> EUR</option>
+        <option value="GBP"><span class="flag-icon flag-icon-gb"></span> GBP</option>
+        <option value="JPY"><span class="flag-icon flag-icon-jp"></span> JPY</option>
+        <option value="SGD"><span class="flag-icon flag-icon-sg"></span> SGD</option>
+  </select>
+
+  <label>To</label>
+
+  <span class="flag-icon flag-icon-us"></span> USD
+    &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-in"></span> INR
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-sg"></span> SGD
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-eu"></span> EUR
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-gb"></span> GBP
+     &nbsp;&nbsp;
+    <span class="flag-icon flag-icon-jp"></span> JPY
+  <select id="to">  
+       <option value="USD"><span class="flag-icon flag-icon-us"></span> USD</option>
+        <option value="INR"><span class="flag-icon flag-icon-in"></span> INR</option>
+        <option value="EUR"><span class="flag-icon flag-icon-eu"></span> EUR</option>
+        <option value="GBP"><span class="flag-icon flag-icon-gb"></span> GBP</option>
+        <option value="JPY"><span class="flag-icon flag-icon-jp"></span> JPY</option>
+        <option value="SGD"><span class="flag-icon flag-icon-sg"></span> SGD</option>
+  </select>
+
+  <button onclick="convert()">Convert</button>
+
+  <p id="result"></p>
+
+</div>
+
+    <div id="loading" style="display:none; text-align:center; margin-top:10px;">
+    ⏳ Converting...
+</div>
 
     <script>
 function convert() {
@@ -43,20 +185,26 @@ function convert() {
     let from = document.getElementById("from").value;
     let to = document.getElementById("to").value;
 
+    // 🔽 LOADING SHOW
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("result").innerText = "";
+
     fetch(`http://127.0.0.1:5000/convert?from=${from}&to=${to}&amount=${amount}`)
         .then(res => res.json())
         .then(data => {
-            if (data.converted_amount !== undefined) {
-                document.getElementById("result").innerText =
-                    "Converted Amount: " + data.converted_amount;
-            } else {
-                document.getElementById("result").innerText = data.error;
-            }
+            // 🔽 LOADING HIDE
+            document.getElementById("loading").style.display = "none";
+
+            document.getElementById("result").innerText =
+                "Converted Amount: " + data.converted_amount;
         })
         .catch(err => {
-            document.getElementById("result").innerText = "Error: " + err;
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("result").innerText = "Error occurred";
         });
 }
+
+
 </script>
 
 </body>
